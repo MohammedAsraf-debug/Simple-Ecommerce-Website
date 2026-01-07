@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Product 6">
+  <rect width="1200" height="800" rx="20" fill="#f0fdf4"/>
+  <g transform="translate(80,80)">
+    <rect width="1040" height="640" rx="16" fill="#ffffff" stroke="#86efac" />
+    <text x="520" y="340" font-family="Poppins, Arial, sans-serif" font-size="42" fill="#065f46" font-weight="700" text-anchor="middle">Professional Camera</text>
+  </g>
+</svg>

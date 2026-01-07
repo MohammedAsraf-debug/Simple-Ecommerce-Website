@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | ShopEasy</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <style>
+        .faq-page {
+            padding: 80px 0;
+        }
+        
+        .faq-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .faq-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .faq-hero p {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-faq {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-faq input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-right: 60px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+        }
+        
+        .search-faq button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .faq-category {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .faq-category:hover,
+        .faq-category.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .faq-category i {
+            margin-right: 8px;
+        }
+        
+        .faq-section {
+            margin-bottom: 80px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .section-header i {
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+        
+        .faq-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: var(--light-color);
+        }
+        
+        .faq-question.active {
+            background: var(--light-color);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 30px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .additional-help {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 60px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .additional-help h2 {
+            margin-bottom: 20px;
+        }
+        
+        .help-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .help-option {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .help-option:hover {
+            transform: translateY(-5px);
+        }
+        
+        .help-option i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .help-option h3 {
+            margin-bottom: 15px;
+        }
+        
+        .help-option p {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .faq-question {
+                padding: 20px;
+                font-size: 16px;
+            }
+            
+            .faq-answer.active {
+                padding: 20px;
+            }
+            
+            .additional-help {
+                padding: 40px 20px;
+            }
+            
+            .help-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEasy</span>
+                </a>
+
+                <div class="search-container">
+                    <div class="category-dropdown">
+                        <button class="category-toggle">
+                            All Categories <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="category-menu">
+                            <a href="categories.html?cat=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                            <a href="categories.html?cat=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                            <a href="categories.html?cat=home"><i class="fas fa-home"></i> Home & Kitchen</a>
+                            <a href="categories.html?cat=beauty"><i class="fas fa-spa"></i> Beauty</a>
+                            <a href="categories.html?cat=sports"><i class="fas fa-basketball-ball"></i> Sports</a>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search for products...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="nav-action" id="accountLink">
+    <!-- JavaScript will update this based on login status -->
+    <a href="pages/login.html" class="nav-icon">
+        <i class="fas fa-user"></i>
+        <span>Login</span>
+    </a>
+</div>
+                    <div class="nav-action">
+                        <a href="wishlist.html" class="nav-icon">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="cart.html" class="nav-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+
+       <!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <h3>ShopEasy Menu</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-search">
+        <input type="text" placeholder="Search products...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    
+    <!-- In products.html, update the mobile menu links -->
+<div class="mobile-menu-links">
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="products.html" class="active"><i class="fas fa-th-large"></i> All Products</a>
+    <a href="categories.html"><i class="fas fa-list"></i> Categories</a>
+    <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="login.html"><i class="fas fa-user"></i> Account</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+</div>
+    
+    <div class="mobile-menu-footer">
+        <p>© 2024 ShopEasy. All rights reserved.</p>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    </header>
+
+    <!-- FAQ Hero -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find quick answers to common questions about shopping with ShopEasy</p>
+            
+            <div class="search-faq">
+                <input type="text" placeholder="Search for answers...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <main class="faq-page">
+        <div class="container">
+            <!-- Categories -->
+            <div class="faq-categories">
+                <div class="faq-category active" data-category="all">
+                    <i class="fas fa-th"></i> All Questions
+                </div>
+                <div class="faq-category" data-category="orders">
+                    <i class="fas fa-shopping-bag"></i> Orders
+                </div>
+                <div class="faq-category" data-category="shipping">
+                    <i class="fas fa-shipping-fast"></i> Shipping
+                </div>
+                <div class="faq-category" data-category="returns">
+                    <i class="fas fa-undo-alt"></i> Returns
+                </div>
+                <div class="faq-category" data-category="payment">
+                    <i class="fas fa-credit-card"></i> Payment
+                </div>
+                <div class="faq-category" data-category="account">
+                    <i class="fas fa-user"></i> Account
+                </div>
+            </div>
+
+            <!-- Orders FAQ -->
+            <section class="faq-section" data-category="orders">
+                <div class="section-header">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h2>Order Questions</h2>
+                </div>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I place an order?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To place an order:</p>
+                            <p>1. Browse products and click "Add to Cart"</p>
+                            <p>2. Review your cart and click "Proceed to Checkout"</p>
+                            <p>3. Enter your shipping and payment information</p>
+                            <p>4. Review your order and click "Place Order"</p>
+                            <p>You'll receive an order confirmation email with all details.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I modify or cancel my order?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Orders can be modified or cancelled within 1 hour of placement. After that, orders are processed for shipping and cannot be changed. To modify or cancel:</p>
+                            <p>1. Go to "My Orders" in your account</p>
+                            <p>2. Find the order you want to change</p>
+                            <p>3. Click "Modify Order" or "Cancel Order"</p>
+                            <p>For immediate assistance, contact our support team.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I track my order?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once your order ships, you'll receive a tracking number via email. You can also track your order:</p>
+                            <p>1. Log into your account</p>
+                            <p>2. Go to "My Orders"</p>
+                            <p>3. Click "Track Order" next to your order</p>
+                            <p>Tracking information is updated regularly as your package moves through our delivery network.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shipping FAQ -->
+            <section class="faq-section" data-category="shipping">
+                <div class="section-header">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h2>Shipping & Delivery</h2>
+                </div>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What are your shipping options?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer three shipping options:</p>
+                            <p><strong>Standard Shipping:</strong> 5-7 business days - $9.99 (Free on orders over $50)</p>
+                            <p><strong>Express Shipping:</strong> 2-3 business days - $19.99</p>
+                            <p><strong>Next Day Shipping:</strong> Next business day - $29.99</p>
+                            <p>Shipping times start from when your order is processed and shipped from our warehouse.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you ship internationally?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We ship to over 50 countries worldwide. International shipping times vary by destination:</p>
+                            <p><strong>Standard International:</strong> 10-20 business days</p>
+                            <p><strong>Express International:</strong> 5-10 business days</p>
+                            <p>Please note that international orders may be subject to customs duties and taxes, which are the responsibility of the recipient.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What happens if I'm not home during delivery?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you're not available for delivery:</p>
+                            <p>1. The delivery driver will leave a delivery attempt notice</p>
+                            <p>2. You'll have 3 business days to pick up the package from your local post office</p>
+                            <p>3. If unclaimed, the package will be returned to us</p>
+                            <p>You can also provide delivery instructions during checkout, such as leaving the package in a safe place or with a neighbor.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Returns FAQ -->
+            <section class="faq-section" data-category="returns">
+                <div class="section-header">
+                    <i class="fas fa-undo-alt"></i>
+                    <h2>Returns & Refunds</h2>
+                </div>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is your return policy?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day return policy for most items. To be eligible for a return:</p>
+                            <p>1. Item must be in original condition (unused, unworn, with tags)</p>
+                            <p>2. Original packaging must be included</p>
+                            <p>3. Return must be initiated within 30 days of delivery</p>
+                            <p>Some items are non-returnable for hygiene reasons (e.g., beauty products, undergarments).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I return an item?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To return an item:</p>
+                            <p>1. Log into your account and go to "My Orders"</p>
+                            <p>2. Select the item you want to return</p>
+                            <p>3. Choose a return reason and submit</p>
+                            <p>4. Print the return label and attach it to your package</p>
+                            <p>5. Drop off at any shipping location</p>
+                            <p>Once we receive your return, we'll process your refund within 5-10 business days.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long do refunds take?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Refund processing times vary by payment method:</p>
+                            <p><strong>Credit/Debit Cards:</strong> 5-10 business days after we receive your return</p>
+                            <p><strong>PayPal:</strong> 3-5 business days after we receive your return</p>
+                            <p><strong>Store Credit:</strong> Immediate upon return approval</p>
+                            <p>You'll receive an email confirmation once your refund is processed.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Help -->
+            <section class="additional-help">
+                <h2>Still Need Help?</h2>
+                <p>Can't find the answer you're looking for? We're here to help!</p>
+                
+                <div class="help-options">
+                    <div class="help-option">
+                        <i class="fas fa-headset"></i>
+                        <h3>Contact Support</h3>
+                        <p>Our support team is available 24/7 to assist you with any questions or concerns.</p>
+                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                    </div>
+                    <div class="help-option">
+                        <i class="fas fa-comments"></i>
+                        <h3>Live Chat</h3>
+                        <p>Chat with our support agents in real-time during business hours for immediate assistance.</p>
+                        <button class="btn btn-outline" onclick="alert('Live chat feature coming soon!')">Start Chat</button>
+                    </div>
+                    <div class="help-option">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Call Us</h3>
+                        <p>Speak directly with our customer service representatives for personalized help.</p>
+                        <a href="tel:+18001234567" class="btn btn-outline">+1 (800) 123-4567</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                    <p>Your one-stop destination for premium shopping experience. Quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> support@shopeasy.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fab fa-cc-amazon-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Open clicked answer if it was closed
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+        
+        // FAQ Category Filter
+        document.querySelectorAll('.faq-category').forEach(category => {
+            category.addEventListener('click', () => {
+                const cat = category.dataset.category;
+                
+                // Update active category
+                document.querySelectorAll('.faq-category').forEach(c => {
+                    c.classList.remove('active');
+                });
+                category.classList.add('active');
+                
+                // Show/hide FAQ sections
+                document.querySelectorAll('.faq-section').forEach(section => {
+                    if (cat === 'all' || section.dataset.category === cat) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // FAQ Search
+        const searchInput = document.querySelector('.search-faq input');
+        const searchButton = document.querySelector('.search-faq button');
+        
+        function searchFAQs() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        searchButton.addEventListener('click', searchFAQs);
+        searchInput.addEventListener('keyup', searchFAQs);
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="ShopEasy logo">
+  <rect width="128" height="128" rx="20" fill="#2563eb" />
+  <g transform="translate(18,30)" fill="#fff">
+    <path d="M20 8c0-4.4 3.6-8 8-8s8 3.6 8 8v2h10c2.2 0 4 1.8 4 4v6H14v-6c0-2.2 1.8-4 4-4h10V8z"/>
+    <path d="M8 30h76v34c0 6.6-5.4 12-12 12H20c-6.6 0-12-5.4-12-12V30z"/>
+  </g>
+  <text x="64" y="108" font-family="Montserrat, Arial, sans-serif" font-size="14" fill="#111" font-weight="700" text-anchor="middle">ShopEasy</text>
+</svg>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | ShopEasy</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEasy</span>
+                </a>
+
+                <div class="search-container">
+                    <div class="category-dropdown">
+                        <button class="category-toggle">
+                            All Categories <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="category-menu">
+                            <a href="categories.html?cat=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                            <a href="categories.html?cat=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                            <a href="categories.html?cat=home"><i class="fas fa-home"></i> Home & Kitchen</a>
+                            <a href="categories.html?cat=beauty"><i class="fas fa-spa"></i> Beauty</a>
+                            <a href="categories.html?cat=sports"><i class="fas fa-basketball-ball"></i> Sports</a>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search for products...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+               <div class="nav-action" id="accountLink">
+                
+               </header> 
+    <!-- JavaScript will update this based on login status -->
+    <a href="pages/login.html" class="nav-icon">
+        <i class="fas fa-user"></i>
+        <span>Login</span>
+    </a>
+</div>
+                    <div class="nav-action">
+                        <a href="wishlist.html" class="nav-icon">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="cart.html" class="nav-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+
+       <!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <h3>ShopEasy Menu</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-search">
+        <input type="text" placeholder="Search products...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    
+   <!-- In products.html, update the mobile menu links -->
+<div class="mobile-menu-links">
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="products.html" class="active"><i class="fas fa-th-large"></i> All Products</a>
+    <a href="categories.html"><i class="fas fa-list"></i> Categories</a>
+    <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="login.html"><i class="fas fa-user"></i> Account</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+</div> 
+    <div class="mobile-menu-footer">
+        <p>© 2024 ShopEasy. All rights reserved.</p>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About ShopEasy</h1>
+            <p>Your trusted partner for premium online shopping experience since 2010. We're committed to bringing you the best products with exceptional service.</p>
+            <a href="products.html" class="btn btn-outline">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <main class="about-page">
+        <div class="container">
+            <div class="about-content">
+                <!-- Our Story -->
+                <section class="about-section">
+                    <h2>Our Story</h2>
+                    <div class="story-content">
+                        <p>Founded in 2010, ShopEasy started as a small online bookstore with a simple mission: to make shopping easy, accessible, and enjoyable for everyone. What began as a passion project has grown into one of the leading e-commerce platforms, serving millions of customers worldwide.</p>
+                        <p>Over the years, we've expanded our product range to include electronics, fashion, home essentials, beauty products, and much more. Our commitment to quality, customer satisfaction, and innovation has remained unwavering.</p>
+                        <p>Today, ShopEasy operates in over 50 countries, with a team of 1000+ dedicated professionals working around the clock to ensure you have the best shopping experience possible.</p>
+                    </div>
+                </section>
+
+                <!-- Mission & Vision -->
+                <section class="about-section">
+                    <h2>Mission & Vision</h2>
+                    <div class="mission-vision">
+                        <div class="mission-card">
+                            <i class="fas fa-bullseye"></i>
+                            <h3>Our Mission</h3>
+                            <p>To provide customers with a seamless, enjoyable, and secure online shopping experience by offering quality products at competitive prices, backed by exceptional customer service.</p>
+                        </div>
+                        <div class="vision-card">
+                            <i class="fas fa-eye"></i>
+                            <h3>Our Vision</h3>
+                            <p>To become the world's most customer-centric e-commerce platform, where people can find and discover anything they want to buy online with trust and confidence.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Statistics -->
+                <section class="about-section">
+                    <h2>By The Numbers</h2>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number">10M+</div>
+                            <div class="stat-label">Happy Customers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">500K+</div>
+                            <div class="stat-label">Products</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Our Team -->
+                <section class="about-section">
+                    <h2>Leadership Team</h2>
+                    <div class="team">
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500" alt="CEO" class="member-image">
+                            <div class="member-info">
+                                <h3 class="member-name">Alex Johnson</h3>
+                                <p class="member-role">CEO & Founder</p>
+                                <p>12+ years in e-commerce, passionate about customer experience</p>
+                                <div class="member-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=500" alt="CTO" class="member-image">
+                            <div class="member-info">
+                                <h3 class="member-name">Sarah Williams</h3>
+                                <p class="member-role">Chief Technology Officer</p>
+                                <p>Tech visionary with 15+ years of experience in digital transformation</p>
+                                <div class="member-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=500" alt="CMO" class="member-image">
+                            <div class="member-info">
+                                <h3 class="member-name">Michael Chen</h3>
+                                <p class="member-role">Chief Marketing Officer</p>
+                                <p>Marketing expert specializing in digital growth strategies</p>
+                                <div class="member-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Values -->
+                <section class="about-section">
+                    <h2>Our Values</h2>
+                    <div class="values">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Customer First</h3>
+                            <p>Our customers are at the heart of everything we do. We strive to exceed expectations with every interaction.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Trust & Integrity</h3>
+                            <p>We build relationships based on trust, transparency, and ethical business practices.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Innovation</h3>
+                            <p>We constantly innovate to improve our platform and enhance your shopping experience.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>Sustainability</h3>
+                            <p>We're committed to sustainable practices and reducing our environmental impact.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Be the first to know about new products and exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                    <p>Your one-stop destination for premium shopping experience. Quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> support@shopeasy.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fab fa-cc-amazon-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

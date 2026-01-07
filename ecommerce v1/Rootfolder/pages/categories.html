@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | ShopEasy</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <style>
+        .categories-page {
+            padding: 40px 0 80px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .category-card-large {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .category-card-large:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .category-content {
+            padding: 30px;
+        }
+        
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .category-icon i {
+            font-size: 30px;
+            color: var(--primary-color);
+        }
+        
+        .category-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-content p {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        .featured-categories {
+            margin-bottom: 80px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .featured-category {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .featured-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .featured-icon i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .featured-category h3 {
+            margin-bottom: 10px;
+        }
+        
+        .featured-category p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .popular-searches {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .popular-searches h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .search-tag {
+            padding: 10px 25px;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 30px;
+            font-size: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .search-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .popular-searches {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading Categories...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEasy</span>
+                </a>
+
+                <div class="search-container">
+                    <div class="category-dropdown">
+                        <button class="category-toggle">
+                            All Categories <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="category-menu">
+                            <a href="categories.html?cat=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                            <a href="categories.html?cat=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                            <a href="categories.html?cat=home"><i class="fas fa-home"></i> Home & Kitchen</a>
+                            <a href="categories.html?cat=beauty"><i class="fas fa-spa"></i> Beauty</a>
+                            <a href="categories.html?cat=sports"><i class="fas fa-basketball-ball"></i> Sports</a>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search for products...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+               <div class="nav-action" id="accountLink">
+    <!-- JavaScript will update this based on login status -->
+    <a href="pages/login.html" class="nav-icon">
+        <i class="fas fa-user"></i>
+        <span>Login</span>
+    </a>
+</div>
+                    <div class="nav-action">
+                        <a href="wishlist.html" class="nav-icon">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="cart.html" class="nav-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <h3>ShopEasy Menu</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-search">
+        <input type="text" placeholder="Search products...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    
+    <!-- In products.html, update the mobile menu links -->
+<div class="mobile-menu-links">
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="products.html" class="active"><i class="fas fa-th-large"></i> All Products</a>
+    <a href="categories.html"><i class="fas fa-list"></i> Categories</a>
+    <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="login.html"><i class="fas fa-user"></i> Account</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+</div>
+    
+    <div class="mobile-menu-footer">
+        <p>© 2024 ShopEasy. All rights reserved.</p>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a> / <span>Categories</span>
+        </div>
+    </section>
+
+    <!-- Categories Page -->
+    <main class="categories-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Shop by Category</h1>
+                <p>Browse our wide range of products organized by categories. Find exactly what you're looking for with ease.</p>
+            </div>
+
+            <!-- Main Categories -->
+            <div class="categories-grid">
+                <!-- Electronics -->
+                <a href="products.html?cat=electronics" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=800" alt="Electronics" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Electronics</h3>
+                        <p>Latest gadgets, smartphones, laptops, TVs, audio devices, and smart home technology from top brands.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.5</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Fashion -->
+                <a href="products.html?cat=fashion" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800" alt="Fashion" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Fashion</h3>
+                        <p>Trendy clothing, footwear, accessories, and jewelry for men, women, and kids. Latest styles and designs.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">1000+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">100+</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.3</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Home & Kitchen -->
+                <a href="products.html?cat=home" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800" alt="Home & Kitchen" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Home & Kitchen</h3>
+                        <p>Furniture, decor, kitchen appliances, cookware, bedding, and home improvement essentials.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">800+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">75+</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.6</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Beauty -->
+                <a href="products.html?cat=beauty" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800" alt="Beauty" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Beauty & Personal Care</h3>
+                        <p>Skincare, makeup, haircare, fragrances, grooming products, and wellness essentials.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">400+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">60+</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.4</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Sports -->
+                <a href="products.html?cat=sports" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800" alt="Sports" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <h3>Sports & Outdoors</h3>
+                        <p>Fitness equipment, sportswear, camping gear, bicycles, and outdoor adventure essentials.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">300+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">40+</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.5</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Books -->
+                <a href="products.html?cat=books" class="category-card-large">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800" alt="Books" class="category-image">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Books & Media</h3>
+                        <p>Best-selling books, magazines, movies, music, and educational materials across all genres.</p>
+                        <div class="category-stats">
+                            <div class="stat">
+                                <span class="stat-number">5000+</span>
+                                <span class="stat-label">Titles</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">100+</span>
+                                <span class="stat-label">Publishers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">4.7</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Featured Categories -->
+            <section class="featured-categories">
+                <div class="section-header">
+                    <h2>Featured Categories</h2>
+                    <a href="products.html" class="view-all">View All Products <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="featured-grid">
+                    <a href="products.html?cat=mobile" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Phones</h3>
+                        <p>Smartphones & Accessories</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=laptop" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Laptops</h3>
+                        <p>Computers & Tablets</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=men-fashion" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Men's Fashion</h3>
+                        <p>Clothing & Accessories</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=women-fashion" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h3>Women's Fashion</h3>
+                        <p>Clothing & Accessories</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=furniture" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <h3>Furniture</h3>
+                        <p>Home & Office Furniture</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=appliances" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-blender"></i>
+                        </div>
+                        <h3>Appliances</h3>
+                        <p>Home & Kitchen Appliances</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=toys" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Toys & Games</h3>
+                        <p>For Kids & Adults</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                    <a href="products.html?cat=grocery" class="featured-category">
+                        <div class="featured-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Grocery</h3>
+                        <p>Food & Beverages</p>
+                        <span class="btn btn-outline btn-sm">Shop Now</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Popular Searches -->
+            <section class="popular-searches">
+                <h2>Popular Searches</h2>
+                <div class="search-tags">
+                    <span class="search-tag">Wireless Headphones</span>
+                    <span class="search-tag">Smart Watch</span>
+                    <span class="search-tag">Running Shoes</span>
+                    <span class="search-tag">Laptop Bag</span>
+                    <span class="search-tag">Air Fryer</span>
+                    <span class="search-tag">Skin Care</span>
+                    <span class="search-tag">Winter Jacket</span>
+                    <span class="search-tag">Gaming Console</span>
+                    <span class="search-tag">Office Chair</span>
+                    <span class="search-tag">Coffee Maker</span>
+                    <span class="search-tag">Backpack</span>
+                    <span class="search-tag">Sunglasses</span>
+                    <span class="search-tag">Yoga Mat</span>
+                    <span class="search-tag">Bluetooth Speaker</span>
+                    <span class="search-tag">Electric Toothbrush</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe for new category launches and exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                    <p>Your one-stop destination for premium shopping experience. Quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> support@shopeasy.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fab fa-cc-amazon-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Update cart and wishlist counts
+        function updateCounts() {
+            // Cart count
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            // Wishlist count
+            const wishlistCount = document.getElementById('wishlistCount');
+            if (wishlistCount) {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                wishlistCount.textContent = wishlist.length;
+                wishlistCount.style.display = wishlist.length > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        // Search tags functionality
+        document.querySelectorAll('.search-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const searchTerm = this.textContent;
+                window.location.href = `products.html?search=${encodeURIComponent(searchTerm)}`;
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounts();
+        });
+    </script>
+</body>
+</html>

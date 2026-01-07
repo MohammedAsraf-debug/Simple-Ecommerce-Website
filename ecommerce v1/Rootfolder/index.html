@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy | Premium Ecommerce Store</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <style>
+        /* Small responsive overrides for header/navbar to ensure it wraps and fits on small screens */
+        .navbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+        .search-container{flex:1;min-width:220px;margin:0 1rem;display:flex;align-items:center}
+        .search-input{flex:1;min-width:120px}
+        .nav-actions{display:flex;align-items:center;gap:0.75rem}
+        .nav-action .badge{margin-left:0.35rem}
+        .mobile-menu-toggle{display:none}
+        @media (max-width: 900px){
+            .search-container{order:3;width:100%;margin-top:0.5rem}
+            .nav-actions{order:2}
+            .logo{order:1}
+            .mobile-menu-toggle{display:block}
+            /* make nav icons smaller on mobile */
+            .nav-action span{display:none}
+            .nav-action .badge{display:inline-block}
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading ShopEasy...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <!-- Main Navbar -->
+            <nav class="navbar">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEasy</span>
+                </a>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="category-dropdown">
+                        <button class="category-toggle">
+                            All Categories <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="category-menu">
+                            <a href="pages/categories.html?cat=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                            <a href="pages/categories.html?cat=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                            <a href="pages/categories.html?cat=home"><i class="fas fa-home"></i> Home & Kitchen</a>
+                            <a href="pages/categories.html?cat=beauty"><i class="fas fa-spa"></i> Beauty</a>
+                            <a href="pages/categories.html?cat=sports"><i class="fas fa-basketball-ball"></i> Sports</a>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search for products, brands and more...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+                <!-- Nav Actions -->
+                <div class="nav-actions">
+                    <div class="nav-action" id="accountLink">
+                        <!-- JavaScript will update this based on login status -->
+                        <a href="pages/login.html" class="nav-icon">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="pages/wishlist.html" class="nav-icon">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="pages/cart.html" class="nav-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+
+            <!-- Categories Navigation -->
+            <div class="categories-nav">
+                <a href="pages/categories.html?cat=electronics" class="category-link">
+                    <i class="fas fa-laptop"></i> Electronics
+                </a>
+                <a href="pages/categories.html?cat=fashion" class="category-link">
+                    <i class="fas fa-tshirt"></i> Fashion
+                </a>
+                <a href="pages/categories.html?cat=home" class="category-link">
+                    <i class="fas fa-home"></i> Home & Kitchen
+                </a>
+                <a href="pages/categories.html?cat=beauty" class="category-link">
+                    <i class="fas fa-spa"></i> Beauty
+                </a>
+                <a href="pages/categories.html?cat=sports" class="category-link">
+                    <i class="fas fa-basketball-ball"></i> Sports
+                </a>
+                <a href="pages/categories.html?cat=groceries" class="category-link">
+                    <i class="fas fa-utensils"></i> Groceries
+                </a>
+                <a href="pages/categories.html?cat=books" class="category-link">
+                    <i class="fas fa-book"></i> Books
+                </a>
+                <a href="pages/categories.html?cat=toys" class="category-link">
+                    <i class="fas fa-gamepad"></i> Toys & Games
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+<!-- Replace the mobile menu section in index.html -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <h3>ShopEasy Menu</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-search">
+        <input type="text" placeholder="Search products...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    
+    <div class="mobile-menu-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="pages/products.html"><i class="fas fa-th-large"></i> All Products</a>
+        <a href="pages/categories.html"><i class="fas fa-list"></i> Categories</a>
+        <a href="pages/wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="pages/cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+        <a href="pages/login.html"><i class="fas fa-user"></i> Account</a>
+        <a href="pages/about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="pages/contact.html"><i class="fas fa-phone"></i> Contact</a>
+        <a href="pages/faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay"></div>
+
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h1>Summer Sale 2024</h1>
+                    <h2>Up to 70% Off on Fashion</h2>
+                    <p>Discover the latest trends at unbeatable prices</p>
+                    <a href="pages/categories.html?cat=fashion" class="btn btn-primary">Shop Now</a>
+                </div>
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>New Tech Arrivals</h1>
+                    <h2>Smart Devices & Gadgets</h2>
+                    <p>Latest electronics with exclusive discounts</p>
+                    <a href="pages/categories.html?cat=electronics" class="btn btn-primary">Explore Tech</a>
+                </div>
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Free Shipping</h3>
+                <p>On orders over $50</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-undo-alt"></i>
+                <h3>30-Day Returns</h3>
+                <p>Hassle-free returns</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Payment</h3>
+                <p>100% secure transactions</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated customer service</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <a href="pages/categories.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="categories-grid">
+                <a href="pages/categories.html?cat=electronics" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Electronics</h3>
+                    <p>200+ Products</p>
+                </a>
+                <a href="pages/categories.html?cat=fashion" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Fashion</h3>
+                    <p>500+ Products</p>
+                </a>
+                <a href="pages/categories.html?cat=home" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Home & Kitchen</h3>
+                    <p>300+ Products</p>
+                </a>
+                <a href="pages/categories.html?cat=beauty" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Beauty</h3>
+                    <p>150+ Products</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <a href="pages/products.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Products will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <h2>Limited Time Offer</h2>
+                <h3>Get 50% Off on Premium Products</h3>
+                <p>Use code: EASY50 at checkout</p>
+                <a href="pages/products.html" class="btn btn-outline">Shop Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="new-arrivals">
+        <div class="container">
+            <div class="section-header">
+                <h2>New Arrivals</h2>
+                <a href="pages/products.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid" id="newArrivals">
+                <!-- Products will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for exclusive deals</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                    <p>Your one-stop destination for premium shopping experience. Quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/products.html">Products</a></li>
+                        <li><a href="pages/categories.html">Categories</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="pages/faq.html">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> support@shopeasy.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fab fa-cc-amazon-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

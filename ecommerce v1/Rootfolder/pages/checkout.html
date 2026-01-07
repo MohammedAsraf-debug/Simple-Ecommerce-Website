@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | ShopEasy</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <style>
+        .checkout-page {
+            padding: 40px 0 80px;
+        }
+        
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+        
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .checkout-steps:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .step.active .step-number {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-color);
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .checkout-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .section-header h2 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .edit-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .payment-method {
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+        
+        .payment-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .payment-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .payment-icon {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .payment-details {
+            padding-left: 34px;
+            margin-top: 15px;
+        }
+        
+        .card-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .order-summary-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .order-summary-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 20px;
+        }
+        
+        .order-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+        
+        .order-item-details {
+            flex: 1;
+        }
+        
+        .order-item-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .order-item-price {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .order-item-qty {
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .summary-row.total {
+            border-bottom: none;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .secure-checkout {
+            text-align: center;
+            color: var(--gray-color);
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .secure-checkout i {
+            color: var(--success-color);
+            margin-right: 5px;
+        }
+        
+        .btn-place-order {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+        }
+        
+        .btn-place-order i {
+            margin-right: 10px;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .terms-checkbox input {
+            margin-top: 5px;
+        }
+        
+        .terms-checkbox label {
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .terms-checkbox a {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-summary-sidebar {
+                position: static;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .checkout-steps {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .checkout-steps:before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            .step-label {
+                font-size: 16px;
+            }
+            
+            .checkout-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading Checkout...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEasy</span>
+                </a>
+
+                <div class="search-container">
+                    <div class="category-dropdown">
+                        <button class="category-toggle">
+                            All Categories <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="category-menu">
+                            <a href="categories.html?cat=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                            <a href="categories.html?cat=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                            <a href="categories.html?cat=home"><i class="fas fa-home"></i> Home & Kitchen</a>
+                            <a href="categories.html?cat=beauty"><i class="fas fa-spa"></i> Beauty</a>
+                            <a href="categories.html?cat=sports"><i class="fas fa-basketball-ball"></i> Sports</a>
+                        </div>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search for products...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+               <div class="nav-action" id="accountLink">
+    <!-- JavaScript will update this based on login status -->
+    <a href="pages/login.html" class="nav-icon">
+        <i class="fas fa-user"></i>
+        <span>Login</span>
+    </a>
+</div>
+                    <div class="nav-action">
+                        <a href="wishlist.html" class="nav-icon">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                    </div>
+                    <div class="nav-action">
+                        <a href="cart.html" class="nav-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+
+      <!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <h3>ShopEasy Menu</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-search">
+        <input type="text" placeholder="Search products...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    
+    <!-- In products.html, update the mobile menu links -->
+<div class="mobile-menu-links">
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="products.html" class="active"><i class="fas fa-th-large"></i> All Products</a>
+    <a href="categories.html"><i class="fas fa-list"></i> Categories</a>
+    <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a href="login.html"><i class="fas fa-user"></i> Account</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+</div>
+
+    <div class="mobile-menu-footer">
+        <p>© 2024 ShopEasy. All rights reserved.</p>
+    </div>
+</div>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a> / 
+            <a href="cart.html">Cart</a> / 
+            <span>Checkout</span>
+        </div>
+    </section>
+
+    <!-- Checkout Page -->
+    <main class="checkout-page">
+        <div class="container">
+            <h1>Checkout</h1>
+            
+            <!-- Checkout Steps -->
+            <div class="checkout-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Information</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Shipping</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+
+            <div class="checkout-container">
+                <!-- Left Column - Forms -->
+                <div class="checkout-forms">
+                    <!-- Contact Information -->
+                    <div class="checkout-section">
+                        <div class="section-header">
+                            <h2>Contact Information</h2>
+                        </div>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control" required placeholder="you@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" class="form-control" required placeholder="+1 234 567 8900">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="checkout-section">
+                        <div class="section-header">
+                            <h2>Shipping Address</h2>
+                            <button class="edit-btn">Edit</button>
+                        </div>
+                        <form id="shippingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address *</label>
+                                <input type="text" id="address" class="form-control" required placeholder="Street address">
+                            </div>
+                            <div class="form-group">
+                                <label for="apartment">Apartment, suite, etc. (optional)</label>
+                                <input type="text" id="apartment" class="form-control" placeholder="Apartment, suite, etc.">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State/Province *</label>
+                                    <input type="text" id="state" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="zipCode">ZIP/Postal Code *</label>
+                                    <input type="text" id="zipCode" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country *</label>
+                                    <select id="country" class="form-control" required>
+                                        <option value="">Select Country</option>
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="IN">India</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Shipping Method -->
+                    <div class="checkout-section">
+                        <div class="section-header">
+                            <h2>Shipping Method</h2>
+                        </div>
+                        <div class="shipping-methods">
+                            <div class="payment-method selected">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fas fa-shipping-fast payment-icon"></i>
+                                        <span>Standard Shipping</span>
+                                    </div>
+                                    <span class="payment-price">$9.99</span>
+                                </div>
+                                <p class="payment-description">Delivery in 5-7 business days</p>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fas fa-rocket payment-icon"></i>
+                                        <span>Express Shipping</span>
+                                    </div>
+                                    <span class="payment-price">$19.99</span>
+                                </div>
+                                <p class="payment-description">Delivery in 2-3 business days</p>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fas fa-plane payment-icon"></i>
+                                        <span>Next Day Shipping</span>
+                                    </div>
+                                    <span class="payment-price">$29.99</span>
+                                </div>
+                                <p class="payment-description">Delivery tomorrow by 9 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="checkout-section">
+                        <div class="section-header">
+                            <h2>Payment Method</h2>
+                        </div>
+                        <div class="payment-methods">
+                            <div class="payment-method selected">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fab fa-cc-visa payment-icon"></i>
+                                        <span>Credit/Debit Card</span>
+                                    </div>
+                                    <input type="radio" name="payment" checked>
+                                </div>
+                                <div class="payment-details">
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card Number</label>
+                                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="card-input-group">
+                                        <div class="form-group">
+                                            <label for="expiryDate">Expiry Date</label>
+                                            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvv">CVV</label>
+                                            <input type="text" id="cvv" class="form-control" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardName">Name on Card</label>
+                                        <input type="text" id="cardName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fab fa-paypal payment-icon"></i>
+                                        <span>PayPal</span>
+                                    </div>
+                                    <input type="radio" name="payment">
+                                </div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-header">
+                                    <div class="payment-title">
+                                        <i class="fab fa-apple payment-icon"></i>
+                                        <span>Apple Pay</span>
+                                    </div>
+                                    <input type="radio" name="payment">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that my order is subject to availability and confirmation of pricing.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary-sidebar">
+                    <div class="order-summary-card">
+                        <h2>Order Summary</h2>
+                        
+                        <div class="order-items" id="orderItems">
+                            <!-- Order items will be loaded via JavaScript -->
+                        </div>
+                        
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="orderSubtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span id="orderShipping">$9.99</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax</span>
+                                <span id="orderTax">$0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span id="orderTotal">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="secure-checkout">
+                            <i class="fas fa-lock"></i>
+                            <span>Secure Checkout</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-place-order" id="placeOrder">
+                        <i class="fas fa-lock"></i> Place Order
+                    </button>
+                    
+                    <p class="secure-checkout">
+                        Your payment information is encrypted and secure. By placing your order, you agree to our Terms of Service.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                    <p>Your one-stop destination for premium shopping experience. Quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> support@shopeasy.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 9:00 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                    <i class="fab fa-cc-amazon-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
